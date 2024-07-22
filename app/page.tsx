@@ -189,7 +189,7 @@ export default function Home() {
         />
       </div>
       <div className="flex flex-col md:flex-row  md:grid md:grid-cols-2 lg:grid-cols-3">
-        {filterDataPriorite?.map((tache: any) => (
+        {filterDataPriorite()?.map((tache: any) => (
           <>
             <div className="p-3" key={tache.id}>
               <div className="relative">
