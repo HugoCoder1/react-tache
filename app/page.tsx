@@ -28,7 +28,7 @@ const initialState = {
 const baseurl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 //COMPOSANT PRINCIPALE
-export default async function Home() {
+export default function Home() {
   const [Nom, setNom] = useState("");
   const [email, setEmail] = useState("");
   const [Description, setDescription] = useState("");
