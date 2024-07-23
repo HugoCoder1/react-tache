@@ -24,8 +24,11 @@ import axios from "axios";
 const initialState = {
   isOpen: false, // State for modal visibility
 };
+//LIEN EN PRODUCTION ENVIRONNEMENT
+const baseurl = process.env.NEXT_PUBLIC_BASE_API_URL;
+
 //COMPOSANT PRINCIPALE
-export default function Home() {
+export default async function Home() {
   const [Nom, setNom] = useState("");
   const [email, setEmail] = useState("");
   const [Description, setDescription] = useState("");
@@ -35,9 +38,6 @@ export default function Home() {
   const [PrioriteChange, setPrioriteChange] = useState("");
 
   const [formData, setFormData] = useState(initialState);
-
-  //LIEN EN PRODUCTION ENVIRONNEMENT
-  const baseurl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
   const handleInputChange = (event: any) => {
     setFormData({
@@ -100,7 +100,6 @@ export default function Home() {
   if (isLoading) {
     return <SkeletonCard />;
   }
-
   //CONDITION DE SWITCH DES STATUS
   const switchStatus = (status: string) => {
     switch (status) {
@@ -189,7 +188,7 @@ export default function Home() {
         />
       </div>
       <div className="flex flex-col md:flex-row  md:grid md:grid-cols-2 lg:grid-cols-3">
-        {filterDataPriorite()?.map((tache: any) => (
+        {filterDataPriorite().map((tache: any) => (
           <>
             <div className="p-3" key={tache.id}>
               <div className="relative">

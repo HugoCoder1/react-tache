@@ -11,8 +11,10 @@ import { Textarea } from "@/components/ui/textarea";
 import ButtonSubmit from "@/components/design/ButtonSubmit";
 // import { Resend } from "resend";
 // const resend = new Resend(process.env.RESEND_API_KEY);
+const baseurl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
-export default function AddTask() {
+
+export default async function AddTask() {
   const router = useRouter();
   const [Nom, setNom] = useState("");
   const [email, setEmail] = useState("");
@@ -20,7 +22,6 @@ export default function AddTask() {
   const [Priorite, setPriorite] = useState("Medium");
   const [Status, setStatus] = useState("A_faire");
   const [loading, setLoading] = useState(false);
-  const baseurl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
   // const [task, setTask] = useState({
   //   Nom: "",
@@ -84,11 +85,10 @@ export default function AddTask() {
             value={Description.trim()}
             onChange={(e) => setDescription(e.target.value)}
           />
-          
         </div>
         <div className="my-2">
           <label htmlFor="Email">Email:</label>
-        
+
           <Input
             required
             type="email"
@@ -100,7 +100,7 @@ export default function AddTask() {
         </div>
         <div className="my-2">
           <label htmlFor="priorité">Priorité:</label>
-         
+
           <select
             required
             name="priorite"

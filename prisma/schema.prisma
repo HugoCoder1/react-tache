@@ -6,15 +6,16 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model Tache {
   id          String   @id @default(cuid())
   Nom         String
   Description String
-  Priorite    String   
+  Priorite    String
   Status      String
   email       String
   createdAt   DateTime @default(now())
