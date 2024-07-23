@@ -13,8 +13,7 @@ import ButtonSubmit from "@/components/design/ButtonSubmit";
 // const resend = new Resend(process.env.RESEND_API_KEY);
 const baseurl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
-
-export default async function AddTask() {
+export default function AddTask() {
   const router = useRouter();
   const [Nom, setNom] = useState("");
   const [email, setEmail] = useState("");
