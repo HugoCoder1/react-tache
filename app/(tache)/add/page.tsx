@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { addTache } from "@/actions/tache";
 
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -9,8 +8,7 @@ import { Input } from "@/components/ui/input";
 
 import { Textarea } from "@/components/ui/textarea";
 import ButtonSubmit from "@/components/design/ButtonSubmit";
-// import { Resend } from "resend";
-// const resend = new Resend(process.env.RESEND_API_KEY);
+
 const baseurl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 export default function AddTask() {
@@ -22,14 +20,7 @@ export default function AddTask() {
   const [Status, setStatus] = useState("A_faire");
   const [loading, setLoading] = useState(false);
 
-  // const [task, setTask] = useState({
-  //   Nom: "",
-  //   Description: "",
-  //   Priorite: "",
-  //   Status: "",
-  //   email: "",
-  // });
-
+  
   //FUNCTION DE SOUMISSON POUR L'AJOUT D'UNE TACHE
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -62,7 +53,6 @@ export default function AddTask() {
       <h1>Ajouter une nouvelle tache</h1>
       <form
         onSubmit={handleSubmit}
-        // action={addTache}
       >
         <div className="my-2">
           <label htmlFor="Nom">Nom:</label>

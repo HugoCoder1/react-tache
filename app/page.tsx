@@ -11,76 +11,18 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
-
-import { toast } from "sonner";
+import { Pencil, Plus } from "lucide-react";
 import Link from "next/link";
-import { getAllTache } from "@/actions/tache";
-import ModalActionAdd from "@/components/design/modal/modal-action-add";
 import { SkeletonCard } from "@/components/design/CardSkeletton";
 import ButtonDetele from "@/components/design/ButtonDetele";
 import axios from "axios";
 
-const initialState = {
-  isOpen: false, // State for modal visibility
-};
 //LIEN EN PRODUCTION ENVIRONNEMENT
 const baseurl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 //COMPOSANT PRINCIPALE
 export default function Home() {
-  const [Nom, setNom] = useState("");
-  const [email, setEmail] = useState("");
-  const [Description, setDescription] = useState("");
-  const [Priorite, setPriorite] = useState("Medium");
-  const [Status, setStatus] = useState("A_faire");
-  const [loading, setLoading] = useState(false);
   const [PrioriteChange, setPrioriteChange] = useState("");
-
-  const [formData, setFormData] = useState(initialState);
-
-  const handleInputChange = (event: any) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  const handleOpenModal = () => {
-    setFormData({ ...formData, isOpen: true });
-  };
-
-  const handleCloseModal = () => {
-    setFormData({ ...formData, isOpen: false });
-  };
-
-  //FUNCTION DE SOUMISSON POUR L'AJOUT D'UNE TACHE
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
-    setLoading(true);
-    try {
-      const res = await axios.post(`${baseurl}/api/tache`, {
-        Nom,
-        Description,
-        Priorite,
-        Status,
-        email,
-      });
-      if (res.status == 200) {
-        toast.success(`Tache ajouter et envoyé à ${email}`);
-      }
-      handleCloseModal(); // Close modal after submit
-    } catch (error) {
-      toast.error("Une erreur a eu lieu");
-    } finally {
-      setLoading(false);
-      setNom("");
-      setDescription("");
-      setPriorite("Medium");
-      setStatus("A_faire");
-      setEmail("");
-    }
-  };
 
   // FETCH DATA LISTE DES TACHES AVEC SWR
   const fetchtache = (url: any) => fetch(url).then((res) => res.json());
@@ -168,24 +110,17 @@ export default function Home() {
             </Badge>
           </div>
         </div>
-
-        <ModalActionAdd
-          formData={formData}
-          handleOpenModal={handleOpenModal}
-          handleCloseModal={handleCloseModal}
-          handleSubmit={handleSubmit}
-          Nom={Nom}
-          setNom={setNom}
-          Description={Description}
-          setDescription={setDescription}
-          email={email}
-          setEmail={setEmail}
-          Priorite={Priorite}
-          setPriorite={setPriorite}
-          Status={Status}
-          setStatus={setStatus}
-          loading={loading}
-        />
+        <div>
+          <Button
+            asChild
+            className="rounded-full w-10 h-10 hover:translate-x-1"
+          >
+            <Link href={"/add"}>
+              {" "}
+              <Plus width={100} />
+            </Link>
+          </Button>
+        </div>
       </div>
       <div className="flex flex-col md:flex-row  md:grid md:grid-cols-2 lg:grid-cols-3">
         {filterDataPriorite().map((tache: any) => (
